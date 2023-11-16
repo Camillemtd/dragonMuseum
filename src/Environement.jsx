@@ -1,14 +1,24 @@
-import { useGLTF, useTexture } from "@react-three/drei";
+import {
+  useGLTF,
+  useTexture,
+  MeshReflectorMaterial,
+  Text,
+  useMatcapTexture,
+} from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import Dragon from "./Dragon";
+import AnimateWord from "./AnimateWord";
 
 const Environement = () => {
   const glb = useGLTF("./model/dragon.glb");
-  const dragonStatue = useGLTF("./model/dragonstatut.glb");
-  const dragonGeometry = dragonStatue.nodes.model.geometry;
-  const dragonMaterial = dragonStatue.nodes.model.material;
+
   console.log(glb);
+  /**
+   * Textures
+   */
+  // Texture floor
   const floorTexture = useTexture(
     "./texture/floor/Wall_Stone_019_basecolor.jpg"
   );
@@ -21,15 +31,25 @@ const Environement = () => {
     "./texture/floor/Wall_Stone_019_roughness.jpg"
   );
 
+  // Water Texture
+  const waterTexture = useTexture("./texture/water/Water_002_COLOR.jpg");
+  const waterNormal = useTexture("./texture/water/Water_002_NORM.jpg");
+  const waterAmbiant = useTexture("./texture/water/Water_002_OCC.jpg");
+  const waterHeight = useTexture("./texture/water/Water_002_DISP.png");
+  const waterRoughness = useTexture("./texture/water/Water_002_ROUGH.jpg");
+
+  /**
+   * Sphere
+   */
   const sphereMaterial = new THREE.MeshStandardMaterial();
   const sphereGeometry = new THREE.SphereGeometry(1, 32, 16);
 
   const positions = [
-    { x: 3, y: 5, z: -6 },
-    { x: -3, y: 2, z: -7.5 },
-    { x: 5, y: 4, z: -7 },
-    { x: -4, y: 5, z: -6 },
-    { x: 3, y: 2, z: -7.5 },
+    { x: 4, y: 5, z: -6.5 },
+    { x: -4, y: 2, z: -7.5 },
+    { x: 6, y: 4, z: -7 },
+    { x: -5, y: 5, z: -6.5 },
+    { x: 4, y: 2, z: -7.5 },
   ];
   const scales = [0.3, 0.9, 0.5, 0.4, 0.8];
 
@@ -64,8 +84,7 @@ const Environement = () => {
               object={object}
               castShadow
               receiveShadow
-              map={floorTexture}
-            />
+            ></primitive>
           );
         }
       })}
@@ -74,22 +93,16 @@ const Environement = () => {
         rotation-x={Math.PI * 0.5}
         receiveShadow
         castShadow
-        position-z={-4}
+        position={[0, 0, -2.7]}
       >
-        <planeGeometry args={[20, 20, 100, 100]} />
-        <meshPhysicalMaterial
-          roughness={0.5}
-          metalness={0.3}
-          aoMap={floorAmbient}
-          aoMapIntensity={0.3}
-          displacementMap={floorHight}
-          displacementScale={0.1}
-          //   roughnessMap={floorRoughness}
-          normalMap={floorNormal}
-          normalScale={[0.5, 0.5]}
-          color={"#fff8c7"}
-          receiveShadow
-          castShadow
+        <planeGeometry args={[20, 15, 100, 100]} />
+
+        <MeshReflectorMaterial
+          resolution={512}
+          blur={[10000, 10000]}
+          mixBlur={1}
+          mirror={0.5}
+          color={"#c2c5aa"}
         />
       </mesh>
       <mesh
@@ -97,31 +110,36 @@ const Environement = () => {
         rotation-x={Math.PI * 0.5}
         receiveShadow
         castShadow
-        position={[0, -0.1, 12]}
+        position={[0, -0.2, 12]}
       >
-        <circleGeometry args={[8.5, 32]} />
+        <circleGeometry args={[9, 32]} />
         <meshPhysicalMaterial
           roughness={0.5}
           metalness={0.3}
           aoMap={floorAmbient}
           aoMapIntensity={0.3}
           displacementMap={floorHight}
-          displacementScale={0.15}
+          displacementScale={0.23}
           roughnessMap={floorRoughness}
           normalMap={floorNormal}
           normalScale={[1, 1]}
-          color={"#fff8c7"}
           receiveShadow
           castShadow
+          color={"#c2c5aa"}
         />
       </mesh>
-      <mesh
-        geometry={dragonGeometry}
-        material={dragonMaterial}
-        rotation-y={Math.PI}
-        position={[0.2, 2.6, 12.5]}
-        scale={3.8}
-      />
+      <Dragon />
+      <mesh position={[0, 0.2, 12]}>
+        <cylinderGeometry args={[3.2, 3.2, 0.1]} />
+        {/* <MeshReflectorMaterial
+          resolution={512}
+          blur={[1000, 1000]}
+          mixBlur={1}
+          mirror={0.5}
+          color={"skyblue"}
+        /> */}
+        <meshBasicMaterial opacity={0.5} transparent={true} color={"blue"} />
+      </mesh>
       {meshRefs.map((ref, index) => (
         <mesh
           key={index}
@@ -138,6 +156,43 @@ const Environement = () => {
           userData={{ direction: 1 }}
         />
       ))}
+      {/* <Text
+        font="./font/BARSADY-Regular.woff"
+        position={[1.8, 4.5, -7]}
+        rotation-y={Math.PI}
+        fontSize={1.5}
+        color={"white"}
+      >
+        Dragon
+      </Text> */}
+      <AnimateWord word="Dragon" basePosition={{ x: 3.5, y: 4.5, z: -7 }} />
+      <AnimateWord word="Museum" basePosition={{ x: -0.005, y: 3.2, z: -7 }} />
+      {/* <Text
+        font="./font/BARSADY-Regular.woff"
+        position={[-1.55, 3.2, -7]}
+        rotation-y={Math.PI}
+        fontSize={1.5}
+        color={"white"}
+      >
+        Museum
+        <meshStandardMaterial
+          emissive={"white"} 
+          emissiveIntensity={1} 
+          metalness={0.1} 
+          roughness={0.5}
+          color={"white"}
+        />
+      </Text> */}
+      <Text
+        font="./font/BARSADY-Regular.woff"
+        position={[2.9, 3.6, -7]}
+        rotation-y={Math.PI}
+        fontSize={0.3}
+        color="black"
+      >
+        by Metard Camille
+      </Text>
+      <ambientLight />
     </group>
   );
 };
