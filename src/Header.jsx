@@ -1,24 +1,31 @@
 import React, { useState } from "react";
+import Menu from "./Menu";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu);
+  };
+
   return (
-    <div className="header">
-		<div className="flex flex-col text-3xl p-6 font-semibold leading-7 w-2/4 text-white">
+    <div className="fixed z-40 w-screen">
+		<div className="flex flex-col text-3xl p-10 font-semibold leading-7 w-2/4 text-white">
 			<span>Dragon</span>
 			<span className="ml-16">Museum</span>
 		</div>
-      
-        <div
-          className="hamburger-lines"
+      <div className="h-14 w-14 absolute top-10 right-9 z-20 flex flex-col justify-center items-center border border-white rounded-full cursor-pointer">
+	  <div
+          className="hamburger-lines block h-12 w-12 z-20 flex flex-col justify-center items-center bg-white rounded-full transition-transform duration-300 ease-in-out"
           onClick={() => {
             setOpenMenu(!openMenu);
           }}
         >
-          <span className={`line line1 ${openMenu ? "rotate45" : ""}`}></span>
-          <span className={`line line2 ${openMenu ? "scaleY0" : ""}`}></span>
-          <span className={`line line3 ${openMenu ? "rotate-45" : ""}`}></span>
+          <i className="fa-solid fa-bars text-amber-900" onClick={() => setOpenMenu(true)}></i>
         </div>
+	  </div>
+       
+		{openMenu && <Menu isOpen={openMenu} toggleMenu={toggleMenu} />}
     </div>
   );
 };

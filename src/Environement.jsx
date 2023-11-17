@@ -69,7 +69,7 @@ const Environement = () => {
   });
 
   return (
-    <group position={[0, -2, -1]} rotation-y={Math.PI} scale={1}>
+    <group position={[0, -2, -1]} rotation-y={Math.PI } scale={1}>
       {Object.keys(glb.nodes).map((key, index) => {
         const object = glb.nodes[key];
         if (
@@ -156,19 +156,18 @@ const Environement = () => {
           userData={{ direction: 1 }}
         />
       ))}
-      {/* <Text
-        font="./font/BARSADY-Regular.woff"
+      <Text
+        font="./font/BARSADY-Bold.woff"
         position={[1.8, 4.5, -7]}
         rotation-y={Math.PI}
         fontSize={1.5}
         color={"white"}
       >
         Dragon
-      </Text> */}
-      <AnimateWord word="Dragon" basePosition={{ x: 3.5, y: 4.5, z: -7 }} />
-      <AnimateWord word="Museum" basePosition={{ x: -0.005, y: 3.2, z: -7 }} />
-      {/* <Text
-        font="./font/BARSADY-Regular.woff"
+      </Text>
+      
+      <Text
+        font="./font/BARSADY-Bold.woff"
         position={[-1.55, 3.2, -7]}
         rotation-y={Math.PI}
         fontSize={1.5}
@@ -182,7 +181,7 @@ const Environement = () => {
           roughness={0.5}
           color={"white"}
         />
-      </Text> */}
+      </Text>
       <Text
         font="./font/BARSADY-Regular.woff"
         position={[2.9, 3.6, -7]}
