@@ -9,8 +9,8 @@ const Dragon = () => {
         geometry={dragonGeometry}
         material={dragonMaterial}
         rotation-y={Math.PI}
-        position={[0.2, 2.6, 12.5]}
-        scale={3.8}
+        position={[0.6, 2.2, 15]}
+        scale={4}
       >
         {/* <meshMatcapMaterial matcap={matcapTexture} color={"#d9d9d9"} /> */}
       </mesh>

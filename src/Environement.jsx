@@ -38,6 +38,11 @@ const Environement = () => {
   const waterHeight = useTexture("./texture/water/Water_002_DISP.png");
   const waterRoughness = useTexture("./texture/water/Water_002_ROUGH.jpg");
 
+  const wallTexture = useTexture('./texture/wall/Tiles_Stone_001_basecolor.jpg')
+  wallTexture.repeat.set(100, 100)
+  wallTexture.wrapS = THREE.RepeatWrapping
+  wallTexture.wrapT = THREE.RepeatWrapping
+
   /**
    * Sphere
    */
@@ -112,8 +117,8 @@ const Environement = () => {
         castShadow
         position={[0, -0.2, 12]}
       >
-        <circleGeometry args={[9, 32]} />
-        <meshPhysicalMaterial
+        <circleGeometry args={[10, 32]} />
+        {/* <meshPhysicalMaterial
           roughness={0.5}
           metalness={0.3}
           aoMap={floorAmbient}
@@ -126,20 +131,27 @@ const Environement = () => {
           receiveShadow
           castShadow
           color={"#c2c5aa"}
+        /> */}
+        <MeshReflectorMaterial
+          resolution={512}
+          blur={[10000, 10000]}
+          mixBlur={1}
+          mirror={0.5}
+          color={"#c2c5aa"}
         />
       </mesh>
       <Dragon />
-      <mesh position={[0, 0.2, 12]}>
+      {/* <mesh position={[0, 0.2, 12]}>
         <cylinderGeometry args={[3.2, 3.2, 0.1]} />
-        {/* <MeshReflectorMaterial
+        <MeshReflectorMaterial
           resolution={512}
           blur={[1000, 1000]}
           mixBlur={1}
           mirror={0.5}
           color={"skyblue"}
-        /> */}
+        />
         <meshBasicMaterial opacity={0.5} transparent={true} color={"blue"} />
-      </mesh>
+      </mesh> */}
       {meshRefs.map((ref, index) => (
         <mesh
           key={index}

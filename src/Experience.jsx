@@ -1,8 +1,33 @@
 import { OrbitControls, Environment, Sparkles } from "@react-three/drei";
 import ModelEnvironement from "./Environement";
 import Camera from "./Camera"
+import { useEffect, useState } from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
+import * as THREE from 'three'
 const Experience = () => {
-	
+	const [cameraPosition, setCameraPosition] = useState([0, 1, 13]);
+    const { camera } = useThree();
+
+    const handleMouseWheel = (event) => {
+        // Vous pouvez ajuster cette logique en fonction de vos besoins
+        // Par exemple, utiliser event.deltaY pour déterminer la direction et la quantité de déplacement
+        let newPositionZ = cameraPosition[2] + (event.deltaY > 0 ? -0.1 : 0.1);
+        newPositionZ = Math.max(-3, Math.min(newPositionZ, 13)); // Limiter entre -3 et 13
+
+        setCameraPosition([0, 1, newPositionZ]);
+    };
+
+    useEffect(() => {
+        window.addEventListener('wheel', handleMouseWheel);
+        return () => {
+            window.removeEventListener('wheel', handleMouseWheel);
+        };
+    }, [cameraPosition]);
+
+    useFrame(() => {
+        // Interpolation pour un mouvement fluide
+        camera.position.lerp(new THREE.Vector3(0, 1, cameraPosition[2]), 0.1);
+    });
 	return (
 		<>
 		{/* <OrbitControls makeDefault /> */}

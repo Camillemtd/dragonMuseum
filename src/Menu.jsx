@@ -25,6 +25,7 @@ const Menu = ({ isOpen, toggleMenu }) => {
           <i className="fa-solid fa-xmark text-white"></i>
         </div>
       </div>
+      <div className="p-20 text-9xl">I LOVE YOUR MOM</div>
     </div>
   );
 };
