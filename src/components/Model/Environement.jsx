@@ -11,7 +11,7 @@ import { useFrame } from "@react-three/fiber";
 import { useRef, useEffect } from "react";
 import Dragon from "./Dragon";
 
-const Environement = ({ introVisible }) => {
+const Environement = ({ introVisible, setOpenLair, updateLairData, openLair }) => {
   const glb = useGLTF("./model/dragon.glb");
 
   /**
@@ -97,7 +97,7 @@ const Environement = ({ introVisible }) => {
           color={"#c2c5aa"}
         />
       </mesh>
-      <Dragon />
+      <Dragon setOpenLair={setOpenLair} updateLairData={updateLairData} openLair={openLair}/>
       {meshRefs.map((ref, index) => (
         <mesh
           key={index}

@@ -4,7 +4,7 @@ import Camera from "../Camera/Camera"
 import { useEffect, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three'
-const Experience = ({setScrollVisible}) => {
+const Experience = ({setScrollVisible, setOpenLair, updateLairData, openLair}) => {
 	const [cameraPosition, setCameraPosition] = useState([0, 1, 13]);
     const { camera } = useThree();
     const handleMouseWheel = (event) => {
@@ -52,7 +52,7 @@ const Experience = ({setScrollVisible}) => {
         position={[3, 2, 0.5]} // La position de la lumière
 		castShadow
       />
-		<ModelEnvironement introVisible={cameraPosition[2]} />
+		<ModelEnvironement introVisible={cameraPosition[2]} setOpenLair={setOpenLair} updateLairData={updateLairData} openLair={openLair}/>
 		<ambientLight intensity={0.5}/>
 		</>
 	);

@@ -2,8 +2,9 @@ import { Html, Text, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
+import Lair from "../Lair";
 
-const Dragon = () => {
+const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
   /**
    * Dragon Model
    */
@@ -36,7 +37,7 @@ const Dragon = () => {
   const geometryCircle = new THREE.CircleGeometry(0.1, 32);
   const materialCircle = new THREE.MeshBasicMaterial({ color: "white" });
 
-  const geometryImage = new THREE.CircleGeometry(0.095, 32)
+  const geometryImage = new THREE.CircleGeometry(0.095, 32);
 
   const geometryRing = new THREE.RingGeometry(0.1, 0.095, 32);
   const materialRing = new THREE.MeshBasicMaterial({
@@ -113,7 +114,6 @@ const Dragon = () => {
   const groupRef3 = useRef();
 
   const [hoveredGroup, setHoveredGroup] = useState(null);
-console.log(currentTitle);
   useFrame(() => {
     [groupRef1, groupRef2, groupRef3].forEach((ref) => {
       if (ref.current) {
@@ -145,6 +145,12 @@ console.log(currentTitle);
     setCurrentTitle("");
     document.body.style.cursor = "auto";
   };
+
+  const handleClick = (category) => {
+    updateLairData(category);
+    setOpenLair(true);
+  };
+
   return (
     <group>
       <mesh
@@ -166,16 +172,9 @@ console.log(currentTitle);
           castShadow
         />
       </mesh>
-      {currentTitle && (
-        <Html
-          position={[0, 3, 8.1]}
-          rotation-y={Math.PI}
-          center
-        >
-          <div className="title text-white text-9xl">
-            {currentTitle}
-          </div>
-          
+      {currentTitle && !openLair && (
+        <Html position={[0, 3, 8.1]} rotation-y={Math.PI} center>
+          <div className="title text-white text-9xl h-20">{currentTitle}</div>
         </Html>
       )}
       <group
@@ -183,6 +182,7 @@ console.log(currentTitle);
         position={[1.8, 4.3, 8]}
         onPointerOver={(e) => handlePointerOver(e, groupRef1)}
         onPointerOut={handlePointerOut}
+        onClick={() => handleClick("Elemental")}
       >
         <mesh
           rotation-y={Math.PI}
@@ -190,54 +190,39 @@ console.log(currentTitle);
           material={materialCircle}
         />
         <mesh geometry={geometryRing} material={materialRing} ref={ringRef1} />
-        {/* <mesh geometry={geometryCircle} rotation-y={Math.PI} scale={2}>
-          <meshBasicMaterial map={elementaireTexture}/>
-        </mesh> */}
       </group>
       <group
         ref={groupRef2}
         position={[0.5, 1.5, 8]}
         onPointerOver={(e) => handlePointerOver(e, groupRef2)}
         onPointerOut={handlePointerOut}
+        onClick={() => handleClick("Mythical")}
       >
         <mesh
           rotation-y={Math.PI}
           geometry={geometryCircle}
           material={materialCircle}
-          renderOrder={1}
         />
-        <mesh geometry={geometryRing} material={materialRing} ref={ringRef2} renderOrder={1} />
-        {/* <mesh geometry={geometryImage} rotation-y={Math.PI}  renderOrder={2}>
-          <meshBasicMaterial map={mythiqueTexture}/>
-        </mesh> */}
+        <mesh geometry={geometryRing} material={materialRing} ref={ringRef2} />
       </group>
       <group
-  ref={groupRef3}
-  position={[-1.5, 4, 8]}
-  onPointerOver={(e) => handlePointerOver(e, groupRef3)}
-  onPointerOut={handlePointerOut}
->
-  {/* <mesh
-    geometry={geometryImage}
-    rotation-y={Math.PI}
-    renderOrder={2} // Plus élevé pour être au-dessus
-  >
-    <meshBasicMaterial map={fantaisieTexture}/>
-  </mesh> */}
-
-  <mesh
-    rotation-y={Math.PI}
-    geometry={geometryCircle}
-    material={materialCircle}
-    renderOrder={1}
-  />
-  <mesh
-    geometry={geometryRing}
-    material={materialRing}
-    ref={ringRef3}
-    renderOrder={1}
-  />
-</group>
+        ref={groupRef3}
+        position={[-1.2, 4.3, 8]}
+        onPointerOver={(e) => handlePointerOver(e, groupRef3)}
+        onPointerOut={handlePointerOut}
+        onClick={() => handleClick("Fantasy")}
+      >
+        <mesh
+          rotation-y={Math.PI}
+          geometry={geometryCircle}
+          material={materialCircle}
+        />
+        <mesh
+          geometry={geometryRing}
+          material={materialRing}
+          ref={ringRef3}
+        />
+      </group>
     </group>
   );
 };
