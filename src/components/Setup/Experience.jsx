@@ -1,13 +1,12 @@
 import { OrbitControls, Environment, Sparkles } from "@react-three/drei";
 import ModelEnvironement from "../Model/Environement";
-import Camera from "./Camera"
+import Camera from "../Camera/Camera"
 import { useEffect, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three'
-const Experience = () => {
+const Experience = ({setScrollVisible}) => {
 	const [cameraPosition, setCameraPosition] = useState([0, 1, 13]);
     const { camera } = useThree();
-
     const handleMouseWheel = (event) => {
         // Vous pouvez ajuster cette logique en fonction de vos besoins
         // Par exemple, utiliser event.deltaY pour déterminer la direction et la quantité de déplacement
@@ -16,6 +15,11 @@ const Experience = () => {
 
         setCameraPosition([0, 1, newPositionZ]);
     };
+   if(cameraPosition[2] <= 12){
+    setScrollVisible(true)
+   } else {
+    setScrollVisible(false)
+   }
 
     useEffect(() => {
         window.addEventListener('wheel', handleMouseWheel);
@@ -27,6 +31,8 @@ const Experience = () => {
     useFrame(() => {
         // Interpolation pour un mouvement fluide
         camera.position.lerp(new THREE.Vector3(0, 1, cameraPosition[2]), 0.1);
+
+        
     });
 	return (
 		<>
@@ -39,14 +45,14 @@ const Experience = () => {
           speed={0.6}
           count={200}
         />
-		<Environment background files={"./baked.hdr"}  />
+		<Environment background files={"./baked.hdr"} />
 		<directionalLight
         color="#faedcd" // La couleur de la lumière
         intensity={3} // L'intensité de la lumière
         position={[3, 2, 0.5]} // La position de la lumière
 		castShadow
       />
-		<ModelEnvironement/>
+		<ModelEnvironement introVisible={cameraPosition[2]} />
 		<ambientLight intensity={0.5}/>
 		</>
 	);

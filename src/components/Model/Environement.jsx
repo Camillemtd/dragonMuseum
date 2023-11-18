@@ -8,13 +8,11 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Dragon from "./Dragon";
-import AnimateWord from "../Setup/AnimateWord";
 
-const Environement = ({ isCameraInPosition }) => {
+const Environement = ({ introVisible }) => {
   const glb = useGLTF("./model/dragon.glb");
-  console.log(glb);
 
   /**
    * Sphere
@@ -126,12 +124,12 @@ const Environement = ({ isCameraInPosition }) => {
           center
         >
           <div
-            className={`w-screen flex flex-col justify-center items-center invisible`}
+            className={`w-screen flex flex-col justify-center items-center titleIntro ${introVisible <= 12 ? 'fade-out' : 'fade-in'} `}
           >
-            <div className="title text-white text-9xl mr-72">Dragon</div>
+            <div className=" text-white text-9xl mr-72">Dragon</div>
 
-            <div className="title text-white text-9xl ml-80">Museum</div>
-            <div className="title text-amber-950 text-3xl w-72 ml-40">
+            <div className=" text-white text-9xl ml-80">Museum</div>
+            <div className=" text-amber-950 text-3xl w-72 ml-40">
               by Metard Camille
             </div>
           </div>
