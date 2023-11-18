@@ -4,44 +4,17 @@ import {
   MeshReflectorMaterial,
   Text,
   useMatcapTexture,
+  Html,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import Dragon from "./Dragon";
-import AnimateWord from "./AnimateWord";
+import AnimateWord from "../Setup/AnimateWord";
 
-const Environement = () => {
+const Environement = ({ isCameraInPosition }) => {
   const glb = useGLTF("./model/dragon.glb");
-
   console.log(glb);
-  /**
-   * Textures
-   */
-  // Texture floor
-  const floorTexture = useTexture(
-    "./texture/floor/Wall_Stone_019_basecolor.jpg"
-  );
-  const floorNormal = useTexture("./texture/floor/Wall_Stone_019_normal.jpg");
-  const floorAmbient = useTexture(
-    "./texture/floor/Wall_Stone_019_ambientOcclusion.jpg"
-  );
-  const floorHight = useTexture("./texture/floor/Wall_Stone_019_height.png");
-  const floorRoughness = useTexture(
-    "./texture/floor/Wall_Stone_019_roughness.jpg"
-  );
-
-  // Water Texture
-  const waterTexture = useTexture("./texture/water/Water_002_COLOR.jpg");
-  const waterNormal = useTexture("./texture/water/Water_002_NORM.jpg");
-  const waterAmbiant = useTexture("./texture/water/Water_002_OCC.jpg");
-  const waterHeight = useTexture("./texture/water/Water_002_DISP.png");
-  const waterRoughness = useTexture("./texture/water/Water_002_ROUGH.jpg");
-
-  const wallTexture = useTexture('./texture/wall/Tiles_Stone_001_basecolor.jpg')
-  wallTexture.repeat.set(100, 100)
-  wallTexture.wrapS = THREE.RepeatWrapping
-  wallTexture.wrapT = THREE.RepeatWrapping
 
   /**
    * Sphere
@@ -74,14 +47,14 @@ const Environement = () => {
   });
 
   return (
-    <group position={[0, -2, -1]} rotation-y={Math.PI } scale={1}>
+    <group position={[0, -2, -1]} rotation-y={Math.PI} scale={1}>
       {Object.keys(glb.nodes).map((key, index) => {
         const object = glb.nodes[key];
         if (
           object.isMesh &&
           object.name !== "floor" &&
           object.name !== "floor2" &&
-          object.name !== "water"
+          object.name !== "arene"
         ) {
           return (
             <primitive
@@ -118,20 +91,6 @@ const Environement = () => {
         position={[0, -0.2, 12]}
       >
         <circleGeometry args={[10, 32]} />
-        {/* <meshPhysicalMaterial
-          roughness={0.5}
-          metalness={0.3}
-          aoMap={floorAmbient}
-          aoMapIntensity={0.3}
-          displacementMap={floorHight}
-          displacementScale={0.23}
-          roughnessMap={floorRoughness}
-          normalMap={floorNormal}
-          normalScale={[1, 1]}
-          receiveShadow
-          castShadow
-          color={"#c2c5aa"}
-        /> */}
         <MeshReflectorMaterial
           resolution={512}
           blur={[10000, 10000]}
@@ -141,17 +100,6 @@ const Environement = () => {
         />
       </mesh>
       <Dragon />
-      {/* <mesh position={[0, 0.2, 12]}>
-        <cylinderGeometry args={[3.2, 3.2, 0.1]} />
-        <MeshReflectorMaterial
-          resolution={512}
-          blur={[1000, 1000]}
-          mixBlur={1}
-          mirror={0.5}
-          color={"skyblue"}
-        />
-        <meshBasicMaterial opacity={0.5} transparent={true} color={"blue"} />
-      </mesh> */}
       {meshRefs.map((ref, index) => (
         <mesh
           key={index}
@@ -168,42 +116,27 @@ const Environement = () => {
           userData={{ direction: 1 }}
         />
       ))}
-      <Text
-        font="./font/BARSADY-Bold.woff"
-        position={[1.8, 4.5, -7]}
-        rotation-y={Math.PI}
-        fontSize={1.5}
-        color={"white"}
-      >
-        Dragon
-      </Text>
-      
-      <Text
-        font="./font/BARSADY-Bold.woff"
-        position={[-1.55, 3.2, -7]}
-        rotation-y={Math.PI}
-        fontSize={1.5}
-        color={"white"}
-      >
-        Museum
-        <meshStandardMaterial
-          emissive={"white"} 
-          emissiveIntensity={1} 
-          metalness={0.1} 
-          roughness={0.5}
+      <group>
+        <Html
+          font="./font/BARSADY-Bold.woff"
+          position-y={3}
+          rotation-y={Math.PI}
+          fontSize={1.5}
           color={"white"}
-        />
-      </Text>
-      <Text
-        font="./font/BARSADY-Regular.woff"
-        position={[2.9, 3.6, -7]}
-        rotation-y={Math.PI}
-        fontSize={0.3}
-        color="black"
-      >
-        by Metard Camille
-      </Text>
-      <ambientLight />
+          center
+        >
+          <div
+            className={`w-screen flex flex-col justify-center items-center invisible`}
+          >
+            <div className="title text-white text-9xl mr-72">Dragon</div>
+
+            <div className="title text-white text-9xl ml-80">Museum</div>
+            <div className="title text-amber-950 text-3xl w-72 ml-40">
+              by Metard Camille
+            </div>
+          </div>
+        </Html>
+      </group>
     </group>
   );
 };

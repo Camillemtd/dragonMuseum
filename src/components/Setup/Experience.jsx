@@ -1,5 +1,5 @@
 import { OrbitControls, Environment, Sparkles } from "@react-three/drei";
-import ModelEnvironement from "./Environement";
+import ModelEnvironement from "../Model/Environement";
 import Camera from "./Camera"
 import { useEffect, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
@@ -41,7 +41,7 @@ const Experience = () => {
         />
 		<Environment background files={"./baked.hdr"}  />
 		<directionalLight
-        color="pink" // La couleur de la lumière
+        color="#faedcd" // La couleur de la lumière
         intensity={3} // L'intensité de la lumière
         position={[3, 2, 0.5]} // La position de la lumière
 		castShadow

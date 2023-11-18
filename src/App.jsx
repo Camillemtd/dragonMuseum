@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber"
-import Experience from "./Experience"
-import Header from "./Header"
-import Footer from "./Footer"
+import Experience from "./components/Setup/Experience"
+import Header from "./components/Header/Header"
+import Footer from "./components/Setup/Footer"
 
 function App() {
 
