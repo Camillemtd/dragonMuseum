@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Experience = ({ setScrollVisible, setOpenLair, updateLairData, openLair }) => {
+const Experience = ({ setScrollVisible, setOpenLair, updateLairData, openLair, openMenu }) => {
     const [cameraPosition, setCameraPosition] = useState([0, 1, 13]);
     const { camera } = useThree();
     const touchYRef = useRef(0);
@@ -70,6 +70,7 @@ const Experience = ({ setScrollVisible, setOpenLair, updateLairData, openLair })
                 setOpenLair={setOpenLair}
                 updateLairData={updateLairData}
                 openLair={openLair}
+                openMenu={openMenu}
             />
             <ambientLight intensity={0.5} />
         </>

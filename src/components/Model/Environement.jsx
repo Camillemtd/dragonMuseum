@@ -16,6 +16,7 @@ const Environement = ({
   setOpenLair,
   updateLairData,
   openLair,
+  openMenu,
 }) => {
   const glb = useGLTF("./model/dragon.glb");
 
@@ -140,33 +141,37 @@ const Environement = ({
           userData={{ direction: 1 }}
         />
       ))}
-      <group>
-        <Html
-          font="./font/BARSADY-Bold.woff"
-          position-y={3}
-          rotation-y={Math.PI}
-          fontSize={1.5}
-          color={"white"}
-          center
-        >
-          <div
-            className={`w-screen flex flex-col justify-center items-center titleIntro ${
-              introVisible <= 12 ? "fade-out" : "fade-in"
-            } ${isHidden ? "hidden" : ""} `}
+      {!openMenu ? (
+        <group>
+          <Html
+            font="./font/BARSADY-Bold.woff"
+            position-y={3}
+            rotation-y={Math.PI}
+            fontSize={1.5}
+            color={"white"}
+            center
           >
-            <div className=" text-white md:text-9xl md:mr-72 text-6xl mr-36">
-              Dragon
-            </div>
+            <div
+              className={`w-screen flex flex-col justify-center items-center titleIntro ${
+                introVisible <= 12 ? "fade-out" : "fade-in"
+              } ${isHidden ? "hidden" : ""} `}
+            >
+              <div className=" text-white md:text-9xl md:mr-72 text-6xl mr-36">
+                Dragon
+              </div>
 
-            <div className=" text-white md:text-9xl text-6xl md:ml-80 ml-36">
-              Museum
+              <div className=" text-white md:text-9xl text-6xl md:ml-80 ml-36">
+                Museum
+              </div>
+              <div className=" text-amber-950 md:text-3xl text-2xl w-72 md:ml-40 ml-56">
+                by Metard Camille
+              </div>
             </div>
-            <div className=" text-amber-950 md:text-3xl text-2xl w-72 md:ml-40 ml-56">
-              by Metard Camille
-            </div>
-          </div>
-        </Html>
-      </group>
+          </Html>
+        </group>
+      ) : (
+        ""
+      )}
     </group>
   );
 };

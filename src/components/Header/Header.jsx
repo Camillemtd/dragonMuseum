@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Menu from "./Menu";
 
-const Header = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+const Header = ({openMenu, setOpenMenu}) => {
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);

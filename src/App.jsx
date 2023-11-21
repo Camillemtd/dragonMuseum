@@ -10,6 +10,7 @@ function App() {
   const [scrollVisible, setScrollVisible] = useState(false);
   const [openLair, setOpenLair] = useState(false);
   const [lairData, setLairData] = useState([]);
+  const [openMenu, setOpenMenu] = useState(false);
 
   // Ouvrir et fermer le composant Lair
   const toggleLair = () => {
@@ -29,7 +30,7 @@ function App() {
       {openLair && (
         <Lair isOpen={openLair} toggleLair={toggleLair} data={lairData} />
       )}
-      <Header />
+      <Header openMenu={openMenu} setOpenMenu={setOpenMenu}/>
       <Footer scrollVisible={scrollVisible} />
       <Canvas shadows>
         <Experience
@@ -37,6 +38,7 @@ function App() {
           setOpenLair={setOpenLair}
           updateLairData={updateLairData}
           openLair={openLair}
+          openMenu={openMenu}
         />
       </Canvas>
     </>
