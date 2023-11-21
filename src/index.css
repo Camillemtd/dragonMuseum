@@ -186,3 +186,7 @@ body,
 .fa-circle-arrow-left{
   cursor: pointer;
 }
+
+.h-dvh{
+  height: 100dvh;
+}

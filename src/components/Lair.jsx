@@ -44,7 +44,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
 
   return (
     <div
-      className={`w-screen h-fit bg-gray-950 fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color}`}
+      className={`w-screen h-dvh bg-gray-950 fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color}`}
     ><div className="h-screen w-screen max-w-screen-2xl">
 		
       <div className="h-full flex">
