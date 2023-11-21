@@ -13,12 +13,10 @@ const Lair = ({ isOpen, toggleLair, data }) => {
   }, [isOpen]);
 
   useEffect(() => {
-    // Déclenche l'animation de fondu à chaque changement de currentIndex
     setAnimationClass("");
     const timeout = setTimeout(() => {
       setAnimationClass("fade-in");
-	  
-    }, 10); // Un court délai avant de déclencher le fade-in
+    }, 10); 
     return () => clearTimeout(timeout);
   }, [currentIndex]);
 
@@ -41,12 +39,12 @@ const Lair = ({ isOpen, toggleLair, data }) => {
 
   const rotationStyle = {
     transform: `rotate(${rotation}deg)`,
-    transition: "transform 0.5s ease", // Transition fluide
+    transition: "transform 0.5s ease", 
   };
 
   return (
     <div
-      className={`w-screen h-screen bg-gray-950 fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color}`}
+      className={`w-screen h-fit bg-gray-950 fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color}`}
     ><div className="h-screen w-screen max-w-screen-2xl">
 		
       <div className="h-full flex">
