@@ -63,7 +63,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
           </h3>
         </div>
         <div className="w-1/2 flex justify-center items-center">
-          <div className="w-128 h-128 md:w-144 md:h-144 border-white border-solid border rounded-full flex items-center justify-center absolute">
+          <div className="w-128 h-128 md:w-156 md:h-156 border-white border-solid border rounded-full flex items-center justify-center absolute">
             <i
               className={`fa-solid fa-circle-arrow-right absolute right-10 md:-right-10 text-2xl cursor-pointer z-50 `}
               onClick={handleNext}
@@ -72,7 +72,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
               className="fa-solid fa-circle-arrow-left absolute md:-left-10 left-10 text-2xl cursor-pointer z-50"
               onClick={handlePrev}
             ></i>
-            <div className="h-129 w-56 border-white border-solid border rounded-full fade-in z-40">
+            <div className="h-129 w-56 md:h-160 md:w-72 border-white border-solid border rounded-full fade-in z-40">
               <img
                 src={data[currentIndex].image}
                 className={`w-full h-full rounded-full object-cover ${animationClass}`}
