@@ -142,6 +142,7 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
     updateLairData(category);
     setOpenLair(true);
   };
+  
 
   const [rotationDragon, setRotationDragon] = useState(Math.PI);
   const [positionDragon, setPositionDragon] = useState([0.6, 3, 13]);

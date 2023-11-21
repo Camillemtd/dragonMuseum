@@ -17,7 +17,6 @@ const Experience = ({ setScrollVisible, setOpenLair, updateLairData, openLair, o
     };
 
     const handleTouchStart = (event) => {
-        event.preventDefault();
         touchYRef.current = event.touches[0].clientY;
     };
 
