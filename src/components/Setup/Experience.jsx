@@ -22,7 +22,7 @@ const Experience = ({ setScrollVisible, setOpenLair, updateLairData, openLair })
 
     const handleTouchMove = (event) => {
         const currentTouchY = event.touches[0].clientY;
-        let newPositionZ = cameraPosition[2] + (touchYRef.current - currentTouchY) * 0.01;
+        let newPositionZ = cameraPosition[2] - (touchYRef.current - currentTouchY) * 0.01;
         newPositionZ = Math.max(-3, Math.min(newPositionZ, 13)); // Limiter entre -3 et 13
         setCameraPosition([0, 1, newPositionZ]);
         touchYRef.current = currentTouchY;
