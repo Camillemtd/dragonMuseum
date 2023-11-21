@@ -160,10 +160,10 @@ const Environement = ({
                 Dragon
               </div>
 
-              <div className=" text-white md:text-9xl text-6xl md:ml-80 ml-36">
+              <div className=" text-white md:text-9xl text-6xl md:ml-56 ml-24">
                 Museum
               </div>
-              <div className=" text-amber-950 md:text-3xl text-2xl w-72 md:ml-40 ml-56">
+              <div className=" text-amber-950 md:text-3xl text-2xl w-72 md:ml-12 ml-44">
                 by Metard Camille
               </div>
             </div>

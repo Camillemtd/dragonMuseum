@@ -7,6 +7,9 @@
   src: url("./public/font/fontbarsady/bar_sady-bold-webfont.woff2") format("woff");
 }
 
+
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap');
+
 body {
   overscroll-behavior-y: none;
 }
@@ -22,7 +25,8 @@ body,
 }
 
 .title {
-  font-family: "BARSADY-Bold", sans-sherif;
+  font-family: 'Cinzel', serif;
+  font-weight:bold;
   animation: tracking-in-contract 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 @keyframes tracking-in-contract {
@@ -49,7 +53,8 @@ body,
   }
 }
 .titleIntro {
-  font-family: "BARSADY-Bold", sans-sherif;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
 }
 
 .blur-out-expand {
