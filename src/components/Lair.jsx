@@ -88,7 +88,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
             ></div>
           </div>
         </div>
-        <div className="md:w-1/4 flex justify-end flex-col absolute md:relative bottom-0 right-0 w-1/2 pl-10 pb-10 md:pl-0 md:pb-10" >
+        <div className="md:w-1/4 flex justify-end flex-col absolute md:relative bottom-0 right-0 w-1/2 pl-10 md:pl-0 md:pb-10" >
 		
           <span className="md:pb-32 md:pr-5 fade-in z-50 relative text-s">
             {data[currentIndex].description}
