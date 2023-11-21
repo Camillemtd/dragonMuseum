@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "BARSADY-Bold";
-  src: url("./font/BARSADY-Bold.woff") format("woff");
+  src: url("./public/font/BARSADY-Bold.woff") format("woff");
 }
 
 body {
