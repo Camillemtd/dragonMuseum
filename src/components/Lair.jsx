@@ -64,7 +64,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
             <p>Origin : {data[currentIndex].origin}</p>
             <p>Région : {data[currentIndex].region}</p>
           </div>
-          <h3 className="titleIntro md:text-7xl text-5xl md:pb-32 pb-10 pl-5 fade-in w-2/3">
+          <h3 className="titleIntro md:text-7xl text-5xl md:pb-32 pb-10 pl-5 fade-in w-2/3 relative z-50">
             {data[currentIndex].name}
           </h3>
         </div>

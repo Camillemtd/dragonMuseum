@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "title";
+  font-family: "BARSADY-Bold";
   src: url("./font/BARSADY-Bold.woff") format("woff");
 }
 
@@ -18,7 +18,7 @@ body,
 }
 
 .title {
-  font-family: "title", sans-sherif;
+  font-family: "BARSADY-Bold", sans-sherif;
   animation: tracking-in-contract 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 @keyframes tracking-in-contract {
@@ -45,7 +45,7 @@ body,
   }
 }
 .titleIntro {
-  font-family: "title", sans-sherif;
+  font-family: "BARSADY-Bold", sans-sherif;
 }
 
 .blur-out-expand {
