@@ -50,6 +50,12 @@ const Lair = ({ isOpen, toggleLair, data }) => {
     ><div className="h-screen w-screen max-w-screen-2xl">
 		
       <div className="h-full flex">
+	  <div
+        className={`xmark block h-11 w-11 absolute top-4 right-5 z-20 flex flex-col justify-center items-center gap-0.75 rounded-full cursor-pointer m-3.75 transition-colors duration-400 ease-in-out ${data[currentIndex].bg}`}
+        onClick={handleClose}
+      >
+        <i className="fa-solid fa-xmark text-white"></i>
+      </div>
         <div className="flex justify-between flex-col h-full w-1/4 ">
           <h2 className="title text-3xl p-5 fade-in">
             {data[currentIndex].category}
@@ -85,12 +91,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
           </div>
         </div>
         <div className="md:w-1/4 flex justify-end flex-col absolute md:relative bottom-0 right-0 w-1/2 pl-10 pb-10 md:pl-0 md:pb-10" >
-		<div
-        className={`xmark block h-11 w-11 absolute top-4 right-5 z-20 flex flex-col justify-center items-center gap-0.75 rounded-full cursor-pointer m-3.75 transition-colors duration-400 ease-in-out ${data[currentIndex].bg}`}
-        onClick={handleClose}
-      >
-        <i className="fa-solid fa-xmark text-white"></i>
-      </div>
+		
           <span className="md:pb-32 md:pr-5 fade-in z-50 relative text-s">
             {data[currentIndex].description}
           </span>
