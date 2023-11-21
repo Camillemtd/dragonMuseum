@@ -6,23 +6,6 @@ const Lair = ({ isOpen, toggleLair, data }) => {
   const [rotation, setRotation] = useState(45);
   const [animationClass, setAnimationClass] = useState("fade-in");
 
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setViewportHeight(window.innerHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const lairStyle = {
-    height: `${viewportHeight}px`, // Définit la hauteur basée sur la hauteur du viewport
-  };
-
   useEffect(() => {
     if (isOpen) {
       setLairClass("fade-in");
@@ -34,6 +17,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
     setAnimationClass("");
     const timeout = setTimeout(() => {
       setAnimationClass("fade-in");
+	  
     }, 10); // Un court délai avant de déclencher le fade-in
     return () => clearTimeout(timeout);
   }, [currentIndex]);
@@ -63,57 +47,58 @@ const Lair = ({ isOpen, toggleLair, data }) => {
   return (
     <div
       className={`w-screen h-screen bg-gray-950 fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color}`}
-	  style={lairStyle}
-    >
-      <div className="h-screen w-screen max-w-screen-2xl">
-        <div className="h-full flex">
-          <div
-            className={`xmark block h-11 w-11 absolute top-4 right-5 z-20 flex flex-col justify-center items-center gap-0.75 rounded-full cursor-pointer m-3.75 transition-colors duration-400 ease-in-out ${data[currentIndex].bg}`}
-            onClick={handleClose}
-          >
-            <i className="fa-solid fa-xmark text-white"></i>
+    ><div className="h-screen w-screen max-w-screen-2xl">
+		
+      <div className="h-full flex">
+	  <div
+        className={`xmark block h-11 w-11 absolute top-4 right-5 z-20 flex flex-col justify-center items-center gap-0.75 rounded-full cursor-pointer m-3.75 transition-colors duration-400 ease-in-out ${data[currentIndex].bg}`}
+        onClick={handleClose}
+      >
+        <i className="fa-solid fa-xmark text-white"></i>
+      </div>
+        <div className="flex justify-between flex-col h-full w-1/4 ">
+          <h2 className="title text-3xl p-5 fade-in">
+            {data[currentIndex].category}
+          </h2>
+          <div className="ml-5 fade-in mb-96 md:mb-0 absolute md:relative mt-24 md:mt-0 w-1/2 z-50">
+            <p>Origin : {data[currentIndex].origin}</p>
+            <p>Région : {data[currentIndex].region}</p>
           </div>
-          <div className="flex justify-between flex-col h-full w-1/4 ">
-            <h2 className="title text-3xl p-5 fade-in">
-              {data[currentIndex].category}
-            </h2>
-            <div className="ml-5 fade-in mb-96 md:mb-0 absolute md:relative mt-24 md:mt-0 w-1/2">
-              <p>Origin : {data[currentIndex].origin}</p>
-              <p>Région : {data[currentIndex].region}</p>
+          <h3 className="titleIntro md:text-7xl text-5xl md:pb-32 pb-10 pl-5 fade-in w-2/3 relative z-50">
+            {data[currentIndex].name}
+          </h3>
+        </div>
+        <div className="w-1/2 flex justify-center items-center">
+          <div className="w-128 h-128 md:w-156 md:h-156 border-white border-solid border rounded-full flex items-center justify-center absolute">
+            <i
+              className={`fa-solid fa-circle-arrow-right absolute right-10 md:-right-10 text-2xl cursor-pointer z-50 `}
+              onClick={handleNext}
+            ></i>
+            <i
+              className="fa-solid fa-circle-arrow-left absolute md:-left-10 left-10 text-2xl cursor-pointer z-50"
+              onClick={handlePrev}
+            ></i>
+            <div className="h-129 w-56 md:h-160 md:w-72 border-white border-solid border rounded-full fade-in z-40">
+              <img
+                src={data[currentIndex].image}
+                className={`w-full h-full rounded-full object-cover ${animationClass}`}
+              />
             </div>
-            <h3 className="titleIntro md:text-7xl text-5xl md:pb-32 pb-10 pl-5 fade-in w-2/3 relative z-50">
-              {data[currentIndex].name}
-            </h3>
-          </div>
-          <div className="w-1/2 flex justify-center items-center">
-            <div className="w-128 h-128 md:w-156 md:h-156 border-white border-solid border rounded-full flex items-center justify-center absolute">
-              <i
-                className={`fa-solid fa-circle-arrow-right absolute right-10 md:-right-10 text-2xl cursor-pointer z-50 `}
-                onClick={handleNext}
-              ></i>
-              <i
-                className="fa-solid fa-circle-arrow-left absolute md:-left-10 left-10 text-2xl cursor-pointer z-50"
-                onClick={handlePrev}
-              ></i>
-              <div className="h-129 w-56 md:h-160 md:w-72 border-white border-solid border rounded-full fade-in z-40">
-                <img
-                  src={data[currentIndex].image}
-                  className={`w-full h-full rounded-full object-cover ${animationClass}`}
-                />
-              </div>
-              <div
-                className="w-120 h-120 md:w-144 md:h-144 border-white border-solid border flex items-center justify-center z-30 absolute"
-                style={rotationStyle}
-              ></div>
-            </div>
-          </div>
-          <div className="md:w-1/4 flex justify-end flex-col absolute md:relative bottom-0 right-0 w-1/2 pl-10 pb-10 md:pl-0 md:pb-10">
-            <span className="md:pb-32 md:pr-5 fade-in z-50 relative text-s">
-              {data[currentIndex].description}
-            </span>
+            <div
+              className="w-120 h-120 md:w-144 md:h-144 border-white border-solid border flex items-center justify-center z-30 absolute"
+              style={rotationStyle}
+            ></div>
           </div>
         </div>
+        <div className="md:w-1/4 flex justify-end flex-col absolute md:relative bottom-0 right-0 w-1/2 pl-10 pb-10 md:pl-0 md:pb-10" >
+		
+          <span className="md:pb-32 md:pr-5 fade-in z-50 relative text-s">
+            {data[currentIndex].description}
+          </span>
+        </div>
       </div>
+	</div>
+      
     </div>
   );
 };

@@ -189,7 +189,7 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
       </mesh>
       {currentTitle && !openLair && (
         <Html position={[0, 3, 8.1]} rotation-y={Math.PI} center>
-          <div className="title text-white text-9xl h-20">{currentTitle}</div>
+          <div className="title text-white text-9xl h-20 hidden md:block">{currentTitle}</div>
         </Html>
       )}
       <group
