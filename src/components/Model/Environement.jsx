@@ -8,10 +8,15 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Dragon from "./Dragon";
 
-const Environement = ({ introVisible, setOpenLair, updateLairData, openLair }) => {
+const Environement = ({
+  introVisible,
+  setOpenLair,
+  updateLairData,
+  openLair,
+}) => {
   const glb = useGLTF("./model/dragon.glb");
 
   /**
@@ -43,6 +48,23 @@ const Environement = ({ introVisible, setOpenLair, updateLairData, openLair }) =
       }
     });
   });
+
+  const [isHidden, setIsHidden] = useState(false);
+
+  useEffect(() => {
+    let timer;
+
+    if (introVisible <= 12) {
+      setIsHidden(false);
+      timer = setTimeout(() => {
+        setIsHidden(true);
+      }, 3000); // 3 secondes
+    } else {
+      setIsHidden(false);
+    }
+
+    return () => clearTimeout(timer); // Nettoyage du timer
+  }, [introVisible]);
 
   return (
     <group position={[0, -2, -1]} rotation-y={Math.PI} scale={1}>
@@ -97,7 +119,11 @@ const Environement = ({ introVisible, setOpenLair, updateLairData, openLair }) =
           color={"#c2c5aa"}
         />
       </mesh>
-      <Dragon setOpenLair={setOpenLair} updateLairData={updateLairData} openLair={openLair}/>
+      <Dragon
+        setOpenLair={setOpenLair}
+        updateLairData={updateLairData}
+        openLair={openLair}
+      />
       {meshRefs.map((ref, index) => (
         <mesh
           key={index}
@@ -124,12 +150,18 @@ const Environement = ({ introVisible, setOpenLair, updateLairData, openLair }) =
           center
         >
           <div
-            className={`w-screen flex flex-col justify-center items-center titleIntro ${introVisible <= 12 ? 'fade-out' : 'fade-in'} `}
+            className={`w-screen flex flex-col justify-center items-center titleIntro ${
+              introVisible <= 12 ? "fade-out" : "fade-in"
+            } ${isHidden ? "hidden" : ""} `}
           >
-            <div className=" text-white text-9xl mr-72">Dragon</div>
+            <div className=" text-white md:text-9xl md:mr-72 text-6xl mr-36">
+              Dragon
+            </div>
 
-            <div className=" text-white text-9xl ml-80">Museum</div>
-            <div className=" text-amber-950 text-3xl w-72 ml-40">
+            <div className=" text-white md:text-9xl text-6xl md:ml-80 ml-36">
+              Museum
+            </div>
+            <div className=" text-amber-950 md:text-3xl text-2xl w-72 md:ml-40 ml-56">
               by Metard Camille
             </div>
           </div>

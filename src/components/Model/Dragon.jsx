@@ -1,8 +1,7 @@
-import { Html, Text, useGLTF, useTexture } from "@react-three/drei";
+import { Html, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import Lair from "../Lair";
 
 const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
   /**
@@ -29,15 +28,8 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
    * Navigation
    */
 
-  // Texture
-  const elementaireTexture = useTexture("./encyclopedie/feu.png");
-  const mythiqueTexture = useTexture("./encyclopedie/arcenciel.png");
-  const fantaisieTexture = useTexture("./encyclopedie/foret.png");
-
   const geometryCircle = new THREE.CircleGeometry(0.1, 32);
   const materialCircle = new THREE.MeshBasicMaterial({ color: "white" });
-
-  const geometryImage = new THREE.CircleGeometry(0.095, 32);
 
   const geometryRing = new THREE.RingGeometry(0.1, 0.095, 32);
   const materialRing = new THREE.MeshBasicMaterial({
@@ -151,13 +143,36 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
     setOpenLair(true);
   };
 
+  const [rotationDragon, setRotationDragon] = useState(Math.PI);
+  const [positionDragon, setPositionDragon] = useState([0.6, 3, 13]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setRotationDragon(window.innerWidth < 400 ? Math.PI * 0.5 : Math.PI);
+      setPositionDragon(
+        window.innerWidth < 400
+          ? new THREE.Vector3(0, 3, 13)
+          : new THREE.Vector3(0.6, 3, 13)
+      );
+    };
+
+    // Définir la rotation initiale
+    handleResize();
+
+    // Ajouter l'écouteur d'événement
+    window.addEventListener("resize", handleResize);
+
+    // Nettoyer l'écouteur d'événement
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <group>
       <mesh
         geometry={dragonGeometry}
         material={dragonMaterial}
-        rotation-y={Math.PI}
-        position={[0.6, 3, 13]}
+        rotation-y={rotationDragon}
+        position={positionDragon}
         scale={5}
       >
         <meshPhysicalMaterial
@@ -179,7 +194,7 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
       )}
       <group
         ref={groupRef1}
-        position={[1.8, 4.3, 8]}
+        position={[1.2, 4.3, 8]}
         onPointerOver={(e) => handlePointerOver(e, groupRef1)}
         onPointerOut={handlePointerOut}
         onClick={() => handleClick("Elemental")}
@@ -207,7 +222,7 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
       </group>
       <group
         ref={groupRef3}
-        position={[-1.2, 4.3, 8]}
+        position={[-0.8, 4.5, 8]}
         onPointerOver={(e) => handlePointerOver(e, groupRef3)}
         onPointerOut={handlePointerOut}
         onClick={() => handleClick("Fantasy")}
@@ -217,11 +232,7 @@ const Dragon = ({ setOpenLair, updateLairData, openLair }) => {
           geometry={geometryCircle}
           material={materialCircle}
         />
-        <mesh
-          geometry={geometryRing}
-          material={materialRing}
-          ref={ringRef3}
-        />
+        <mesh geometry={geometryRing} material={materialRing} ref={ringRef3} />
       </group>
     </group>
   );

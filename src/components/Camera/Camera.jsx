@@ -5,6 +5,7 @@ const Camera = () => {
 		<PerspectiveCamera
 			makeDefault 
 			position={[ 0, 1, 13]}
+			rotation-y={0.01}
 			/>
 	);
 };
