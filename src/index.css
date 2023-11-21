@@ -7,6 +7,10 @@
   src: url("./font/BARSADY-Bold.woff") format("woff");
 }
 
+body {
+  overscroll-behavior-y: contain;
+}
+
 html,
 body,
 #root {
