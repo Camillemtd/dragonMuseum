@@ -37,7 +37,7 @@ function App() {
       {openLair && (
         <Lair isOpen={openLair} toggleLair={toggleLair} data={lairData} />
       )}
-      <Header openMenu={openMenu} setOpenMenu={setOpenMenu}/>
+      <Header openMenu={openMenu} setOpenMenu={setOpenMenu} setOpenLair={setOpenLair} updateLairData={updateLairData}/>
       <Footer scrollVisible={scrollVisible} />
       <Canvas shadows onCreated={handleCanvasLoaded}>
         <Experience

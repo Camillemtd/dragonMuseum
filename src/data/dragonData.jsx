@@ -17,8 +17,8 @@ const dragonData = [
 	  description: "Icy blue in color, this dragon exhales a freezing breath that can freeze anything it touches. Its scales resemble ice crystals, and its eyes are a deep blue.",
 	  region: "Glacial Cliffs of Cryon",
 	  image: './encyclopedie/ice.webp',
-	  color:'text-teal-400',
-	  bg: 'bg-teal-400',
+	  color:'text-cyan-600',
+	  bg: 'bg-teal-600',
 	},
 	{
 	  category: "Elemental",
@@ -27,10 +27,21 @@ const dragonData = [
 	  description: "With electric yellow scales, this dragon can generate powerful lightning. It has agile wings and eyes that sparkle like lightning.",
 	  region: "Thunderous Peaks of Thorun",
 	  image: './encyclopedie/light.webp',
-	  color: 'text-yellow-200',
-	  bg: 'bg-yellow-200'
+	  color: 'text-yellow-500',
+	  bg: 'bg-yellow-500'
 	},
 	// Category: Mythical
+	{
+		category: "Mythical",
+		name: "Forest Dragon",
+		origin: "Emerald Grove Realms",
+		description: "A mystical dragon with emerald green scales, resembling tree leaves. It has horns that blend into the canopy and bright green eyes.",
+		region: "Greatwoods of Syllana",
+		image:'./encyclopedie/foret.png',
+		color: "text-lime-700",
+		bg: 'bg-lime-700'
+		
+	  },
 	{
 	  category: "Mythical",
 	  name: "Chinese Dragon",
@@ -38,8 +49,8 @@ const dragonData = [
 	  description: "Long and serpentine with golden scales, this dragon is a symbol of wisdom. It has a fine beard and long whiskers, typical of Eastern dragons.",
 	  region: "Jade Forests of Jiangliu",
 	  image: './encyclopedie/chinese.webp',
-	  color: "text-orange-100",
-	  bg: 'bg-orange-100'
+	  color: "text-sky-900",
+	  bg: 'bg-sky-900'
 	},
 	{
 	  category: "Mythical",
@@ -51,17 +62,7 @@ const dragonData = [
 	  color: 'text-yellow-800',
 	  bg: 'bg-yellow-800'
 	},
-	{
-	  category: "Mythical",
-	  name: "Forest Dragon",
-	  origin: "Emerald Grove Realms",
-	  description: "A mystical dragon with emerald green scales, resembling tree leaves. It has horns that blend into the canopy and bright green eyes.",
-	  region: "Greatwoods of Syllana",
-	  image:'./encyclopedie/foret.png',
-	  color: "text-lime-700",
-	  bg: 'bg-lime-700'
-	  
-	},
+	
 	// Category: Fantasy
 	{
 	  category: "Fantasy",
@@ -80,8 +81,8 @@ const dragonData = [
 	  description: "This dragon has ocean-blue scales and can breathe underwater. It has elegant fins and deep blue eyes reminiscent of the ocean depths.",
 	  region: "Abyssal Trenches of Marinus",
 	  image: "./encyclopedie/aqua.png",
-	  color: "text-cyan-400",
-	  bg: 'bg-cyan-400'
+	  color: "text-cyan-600",
+	  bg: 'bg-cyan-600'
 	},
 	{
 	  category: "Fantasy",
@@ -90,8 +91,8 @@ const dragonData = [
 	  description: "With scales that seem to contain galaxies, this dragon travels through space. It has star-like eyes and transparent wings like the cosmic void.",
 	  region: "Galactic Spirals of Cosmosis",
 	  image: './encyclopedie/cosmid.webp',
-	  color: 'text-cyan-100',
-	  bg: 'bg-cyan-100'
+	  color: 'text-gray-500',
+	  bg: 'bg-gray-500'
 	}
   ];
   

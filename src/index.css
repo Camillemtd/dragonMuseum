@@ -195,3 +195,12 @@ body,
 .h-dvh{
   height: 100dvh;
 }
+
+.transition {
+  transition: color 0.4s ease-in-out;
+}
+
+.background{
+  background: radial-gradient(circle at center, #f8d7da 0%, #f5e2c8 50%, #f8d7da 100%);
+}
+

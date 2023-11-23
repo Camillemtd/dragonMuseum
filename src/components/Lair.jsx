@@ -44,7 +44,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
 
   return (
     <div
-      className={`w-screen h-dvh bg-gray-950 fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color}`}
+      className={`w-screen h-dvh background fixed z-50 flex justify-center items-center ${lairClass} ${data[currentIndex].color} transition`}
     ><div className="h-screen w-screen max-w-screen-2xl">
 		
       <div className="h-full flex">
@@ -67,7 +67,7 @@ const Lair = ({ isOpen, toggleLair, data }) => {
           </h3>
         </div>
         <div className="w-1/2 flex justify-center items-center">
-          <div className="w-128 h-128 md:w-156 md:h-156 border-white border-solid border rounded-full flex items-center justify-center absolute">
+          <div className="w-128 h-128 md:w-156 md:h-156 border-solid border border-orange-900 rounded-full flex items-center justify-center absolute">
             <i
               className={`fa-solid fa-circle-arrow-right absolute right-10 md:-right-10 text-2xl cursor-pointer z-50 `}
               onClick={handleNext}
@@ -76,14 +76,14 @@ const Lair = ({ isOpen, toggleLair, data }) => {
               className="fa-solid fa-circle-arrow-left absolute md:-left-10 left-10 text-2xl cursor-pointer z-50"
               onClick={handlePrev}
             ></i>
-            <div className="h-129 w-56 md:h-160 md:w-72 border-white border-solid border rounded-full fade-in z-40">
+            <div className="h-129 w-56 md:h-160 md:w-72 border-solid border-orange-900 border rounded-full fade-in z-40">
               <img
                 src={data[currentIndex].image}
                 className={`w-full h-full rounded-full object-cover ${animationClass}`}
               />
             </div>
             <div
-              className="w-120 h-120 md:w-144 md:h-144 border-white border-solid border flex items-center justify-center z-30 absolute"
+              className="w-120 h-120 md:w-144 md:h-144 border-orange-900 border-solid border flex items-center justify-center z-30 absolute"
               style={rotationStyle}
             ></div>
           </div>

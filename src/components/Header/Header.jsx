@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Menu from "./Menu";
 
-const Header = ({openMenu, setOpenMenu}) => {
+const Header = ({openMenu, setOpenMenu, setOpenLair, updateLairData,}) => {
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
@@ -24,7 +24,7 @@ const Header = ({openMenu, setOpenMenu}) => {
         </div>
 	  </div>
        
-		{openMenu && <Menu isOpen={openMenu} toggleMenu={toggleMenu} />}
+		{openMenu && <Menu isOpen={openMenu} toggleMenu={toggleMenu}  setOpenLair={setOpenLair} updateLairData={updateLairData}/>}
     </div>
   );
 };
